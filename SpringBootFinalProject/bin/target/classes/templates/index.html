@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Course Scheduler App</title>
+    <!-- Bootstrap -->
+       <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <style>
+        .navbar{
+            margin-bottom:0;
+            border-radius:0;
+        }
+        .margin-left{
+            margin-right: 5px;
+        }
+        .jumbotron{
+            margin-bottom:0;
+            border-radius:0;
+        }
+
+    </style>
+</head>
+<body background="http://52.221.209.91/wp-content/uploads/2017/01/trianglify-background.png">
+  <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+th:href="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"
+></script>
+
+<!--navbar satarts-->
+<nav class="navbar  navbar-dark">
+    <!-- navbar container starts -->
+    <div class="container">
+      
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+           
+
+
+          <!-- sign in modal -->
+            <div class="modal fade" data-kayboard="false" data-backdrop="static"  id="loginModal">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">x</button>
+                            <h4>Login to Course Scheduler</h4>
+                        </div>
+ <form th:object ="${user}" th:action ="@{validateUser}" method="post" action='#' name="vaidate_user_form">
+                        
+                        <div class="modal-body">
+                           
+                                <div class="form-group">
+                                    <label for="signInUsername">Username:</label>
+                                    <input type="text"  th:field="*{userName}"  class="form-control" name="signInUsername" id="signInUsername" placeholder="Username"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signInPassword">Password:</label>
+                                    <input type="password" th:field="*{password}" class="form-control" name="signInPassword" id="signInPassword" placeholder="Password"/>
+                                </div>
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary">Sign in</button>
+                        </div>
+                         </form>
+                    </div>
+                </div>
+            </div><!-- sign in modal ends-->
+
+
+            <!-- signup-->
+            <button type="button" class="btn btn-primary navbar-btn pull-right col-sm-1 navbar-btn margin-left" data-target="#signUpModal" data-toggle="modal">Sign Up</button>
+            <!-- signup modal-->
+            <div class="modal fade" data-kayboard="false" data-backdrop="static"  id="signUpModal">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">x</button>
+                            <h4>Sign up to Course Scheduler</h4>
+                        </div>
+                     <form th:object ="${user}" th:action ="@{saveUser}" method="post" action='#' name="add_course_form">
+                        
+                        <div class="modal-body">
+                                    <div class="form-group">
+                                    <label for="profName">Professor Name</label>
+                                    <input type="name" class="form-control"   th:field="*{profName}" name="profName" id="profName" placeholder="profName"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signUpUserName">Username:</label>
+                                    <input type="text" class="form-control" th:field="*{userName}" name="signUpUserName" id="signUpUserName" placeholder="Username"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signUpEmail">Email:</label>
+                                    <input type="email" class="form-control" name="signUpEmail" th:field="*{profEmail}"   id="signUpEmail" placeholder="Email"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signUpPassword">Password:</label>
+                                    <input type="password" class="form-control" th:field="*{password}" name="signUpPassword" id="signUpPassword" placeholder="Password"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signUpConfPassword">Confirm Password:</label>
+                                    <input type="password" class="form-control" name="signUpConfPassword" id="signUpConfPassword" placeholder="Confirm Password"/>
+                                </div>
+
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary">Sign Up</button>
+                        </div>
+                         </form>
+                    </div>
+                </div>
+            </div><!-- sign up modal ends -->
+        </div>
+    </div><!-- navbar container ends -->
+</nav><!-- navbar ends -->
+
+
+<!-- jumbotron starts -->
+<div class=" text-center">
+    <div class="container">
+    <br></br><br></br><br></br><br></br><br></br><br></br>
+        <h3>Welcome to Course Scheduler</h3>
+        <p>One stop destination to all course activities</p>
+   
+            <button type="button" class="btn btn-primary" data-target="#loginModal" data-toggle="modal">Sign in</button>
+          <!-- signup-->
+            <button type="button" class="btn btn-primary" data-target="#signUpModal" data-toggle="modal">Sign Up</button>
+            
+    </div>
+</div>
+</body>
+</html>

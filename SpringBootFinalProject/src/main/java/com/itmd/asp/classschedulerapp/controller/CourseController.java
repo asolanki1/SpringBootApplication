@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.itmd.asp.classschedulerapp.dao.CourseRepository;
+import com.itmd.asp.classschedulerapp.model.Activity;
 import com.itmd.asp.classschedulerapp.model.Course;
 import com.itmd.asp.classschedulerapp.model.Greeting;
 import com.itmd.asp.classschedulerapp.model.User;
@@ -40,6 +41,9 @@ public class CourseController {
     	courseRepositary.save(course);
         List<Course> tests = courseRepositary.findAllByCoursesId(userName);
         model.addAttribute("courseList", tests);
+        model.addAttribute("course",new Course());
+        model.addAttribute("activity",new Activity());
+
     	  System.out.println("heereadddingcourse");
        return "mainPage";
     }

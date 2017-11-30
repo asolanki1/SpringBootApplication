@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Course Scheduler App</title>
+    <!-- Bootstrap -->
+       <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <style>
+        .navbar{
+            margin-bottom:0;
+            border-radius:0;
+        }
+        .margin-left{
+            margin-right: 5px;
+        }
+        .jumbotron{
+            margin-bottom:0;
+            border-radius:0;
+        }
+
+    </style>
+</head>
+<body>
+  <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+th:href="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"
+></script>
+
+<!--navbar satarts-->
+<nav class="navbar  navbar-dark">
+    <!-- navbar container starts -->
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-list"></span><bold> Course Scheduler</bold></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Features</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+
+
+
+            <button type="button" class="btn btn-primary navbar-btn pull-right col-sm-1 navbar-btn" data-target="#loginModal" data-toggle="modal">Sign in</button>
+
+            <!-- sign in modal -->
+            <div class="modal fade" data-kayboard="false" data-backdrop="static"  id="loginModal">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">x</button>
+                            <h4>Login to Course Scheduler</h4>
+                        </div>
+ <form th:object ="${user}" th:action ="@{validateUser}" method="post" action='#' name="vaidate_user_form">
+                        
+                        <div class="modal-body">
+                           
+                                <div class="form-group">
+                                    <label for="signInUsername">Username:</label>
+                                    <input type="text"  th:field="*{userName}"  class="form-control" name="signInUsername" id="signInUsername" placeholder="Username"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signInPassword">Password:</label>
+                                    <input type="password" th:field="*{password}" class="form-control" name="signInPassword" id="signInPassword" placeholder="Password"/>
+                                </div>
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary">Sign in</button>
+                        </div>
+                         </form>
+                    </div>
+                </div>
+            </div><!-- sign in modal ends-->
+
+
+            <!-- signup-->
+            <button type="button" class="btn btn-primary navbar-btn pull-right col-sm-1 navbar-btn margin-left" data-target="#signUpModal" data-toggle="modal">Sign Up</button>
+            <!-- signup modal-->
+            <div class="modal fade" data-kayboard="false" data-backdrop="static"  id="signUpModal">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">x</button>
+                            <h4>Sign up to Course Scheduler</h4>
+                        </div>
+                     <form th:object ="${user}" th:action ="@{saveUser}" method="post" action='#' name="add_course_form">
+                        
+                        <div class="modal-body">
+                                    <div class="form-group">
+                                    <label for="profName">Professor Name</label>
+                                    <input type="name" class="form-control"   th:field="*{profName}" name="profName" id="profName" placeholder="profName"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signUpUserName">Username:</label>
+                                    <input type="text" class="form-control" th:field="*{userName}" name="signUpUserName" id="signUpUserName" placeholder="Username"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signUpEmail">Email:</label>
+                                    <input type="email" class="form-control" name="signUpEmail" th:field="*{profEmail}"   id="signUpEmail" placeholder="Email"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signUpPassword">Password:</label>
+                                    <input type="password" class="form-control" th:field="*{password}" name="signUpPassword" id="signUpPassword" placeholder="Password"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signUpConfPassword">Confirm Password:</label>
+                                    <input type="password" class="form-control" name="signUpConfPassword" id="signUpConfPassword" placeholder="Confirm Password"/>
+                                </div>
+
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary">Sign Up</button>
+                        </div>
+                         </form>
+                    </div>
+                </div>
+            </div><!-- sign up modal ends -->
+
+        </div>
+    </div><!-- navbar container ends -->
+</nav><!-- navbar ends -->
+
+
+<!-- jumbotron starts -->
+<div class="jumbotron text-center">
+    <div class="container">
+        <h3>Welcome to Course Scheduler</h3>
+        <p>One stop destination to all course activities</p>
+        <p>Please find preview below</p>
+        
+    </div>
+</div><!-- jumbotron ends -->
+
+
+<div class="container"><!--container starts-->
+
+    <!-- add course, activity button row starts -->
+    <div class="row">
+
+        <!-- add course -->
+        <div class="container col-12 col-md-3">
+            <button type="button" class="btn btn-success navbar-btn pull-left col-sm-12 navbar-btn" data-target="#addCourseModal" data-toggle="modal">Add course</button>
+     
+        </div> <!-- add course ends -->
+
+
+
+        <!-- add activity -->
+        <div class="container col-12 col-md-9">
+            <button type="button" class="btn btn-success pull-right col-sm-3 navbar-btn" >Add activity</button>
+
+           
+        </div> <!-- add activity ends -->
+    </div><!-- add course, activity button row ends -->
+
+
+    <!-- left, right panel starts -->
+    <div class="row">
+        <!-- left sidebard starts -->
+        <div class="col-12 col-md-3 sidebar-offcanvas" id="sidebar">
+            <div class="list-group table-condensed" >
+                <a href="#" class="list-group-item active">Course List</a>
+                <a href="#" class="list-group-item">ITMD 515 - Adavnced Software Programming</a>
+                <a href="#" class="list-group-item">ITMD 566 - Service Oriented Architectrue</a>
+                <a href="#" class="list-group-item">CS 525 - Database Organization</a>
+                <a href="#" class="list-group-item">CS 445 - Object Oriented Design and Programing</a>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary btn-block">Activity Log</button>
+            </div>
+        </div><!-- left sidebard ends -->
+
+        <!-- Right panel starts -->
+        <div class="col-12 col-md-9 table-responsive">
+            <table class="table table-striped table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th class="col-xs-2 text-center">Date</th>
+                    <th class="col-xs-6 text-center">Course Activity</th>
+                    <th class="col-xs-2 text-center">Action</th>
+                    <th class="col-xs-1 text-center">Status</th>
+                    <th class="col-xs-1 text-center">Edit</th>
+                    <th class="col-xs-1 text-center">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-xs-2 text-center">1 November</td>
+                    <td class="col-xs-6 text-left">ITMD 515 - Assignment 2</td>
+                    <td class="col-xs-2 text-center">Upload on BB</td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-ok"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-glyphicon glyphicon-pencil"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon glyphicon-trash"></span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-2 text-center">1 November</td>
+                    <td class="col-xs-6 text-left">ITMD 515 - Assignment 2</td>
+                    <td class="col-xs-2 text-center">Upload on BB</td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-ok"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-glyphicon glyphicon-pencil"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon glyphicon-trash"></span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-2 text-center">1 November</td>
+                    <td class="col-xs-6 text-left">ITMD 515 - Assignment 2</td>
+                    <td class="col-xs-2 text-center">Upload on BB</td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-ok"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-glyphicon glyphicon-pencil"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon glyphicon-trash"></span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-2 text-center">16 November</td>
+                    <td class="col-xs-6 text-left">ITMD 515 - Final Project</td>
+                    <td class="col-xs-2 text-center">Grad on BB</td>
+                    <td class="col-xs-1 text-center"><input type="checkbox" value=""/></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-glyphicon glyphicon-pencil"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon glyphicon-trash"></span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-2 text-center">16 November</td>
+                    <td class="col-xs-6 text-left">ITMD 515 - Final Project</td>
+                    <td class="col-xs-2 text-center">Grad on BB</td>
+                    <td class="col-xs-1 text-center"><input type="checkbox" value=""/></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-glyphicon glyphicon-pencil"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon glyphicon-trash"></span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-2 text-center">16 November</td>
+                    <td class="col-xs-6 text-left">ITMD 515 - Final Project</td>
+                    <td class="col-xs-2 text-center">Grad on BB</td>
+                    <td class="col-xs-1 text-center"><input type="checkbox" value=""/></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-glyphicon glyphicon-pencil"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon glyphicon-trash"></span></td>
+                </tr><tr>
+                    <td class="col-xs-2 text-center">16 November</td>
+                    <td class="col-xs-6 text-left">ITMD 515 - Final Project</td>
+                    <td class="col-xs-2 text-center">Grad on BB</td>
+                    <td class="col-xs-1 text-center"><input type="checkbox" value=""/></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-glyphicon glyphicon-pencil"></span></td>
+                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon glyphicon-trash"></span></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div><!-- Right panel starts -->
+
+    </div><!-- left, right panel starts -->
+
+
+</div><!--container ends-->
+
+</body>
+</html>

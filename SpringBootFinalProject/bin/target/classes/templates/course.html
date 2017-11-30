@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Course Scheduler App</title>
+    <!-- Bootstrap -->
+       <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <style>
+        .navbar{
+            margin-bottom:0;
+            border-radius:0;
+        }
+        .margin-left{
+            margin-right: 5px;
+        }
+        .jumbotron{
+            margin-bottom:0;
+            border-radius:0;
+        }
+
+    </style>
+</head>
+<body>
+  <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+th:href="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"
+></script>
+
+<!-- jumbotron starts -->
+<div class="jumbotron text-center">
+    <div class="container">
+        <h3  th:text="${CourseName}" ></h3>
+    </div>
+</div>
+<div class="row">
+        <!-- left sidebard starts -->
+        <div class="col-12 col-md-3 sidebar-offcanvas" id="sidebar" th:object="${course}">
+            <div class="list-group table-condensed" >
+                <a href="#" class="list-group-item active">Course Details</a>
+                <a href="#"   class="list-group-item" th:text="'Course Name : ' + ${course.courseName}">Course Name</a>
+              	<a href="#"   class="list-group-item" th:text="'Course Code : ' + ${course.courseCode}"></a>
+                <a  href="#"  class="list-group-item" th:text="'Course Sem : ' + ${course.sem}"></a>
+                <a href="#"   class="list-group-item" th:text="'Course TAName : ' + ${course.taName}"></a>
+                <a   href="#" class="list-group-item" th:text="'Course TAEmail : ' + ${course.taEmail}"></a>
+                <a  href="#"  class="list-group-item" th:text="'Course TAPhone : ' + ${course.taPhone}"></a>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>
