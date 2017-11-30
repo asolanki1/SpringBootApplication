@@ -19,12 +19,10 @@ public class ActivityService {
         this.activityRepository = activityRepository;
     }
 
-    public List<Activity> findAll(){
-        List<Activity> activities = new ArrayList<>();
-        for(Activity activity : activityRepository.findAll() ) {
-            activities.add(activity);
-        }
-        return activities;
+    public List<Activity> findActivityByCoursesCode(String courseCode){
+   
+		return activityRepository.findActivityByCoursesCode(courseCode);
+         
     }
 
     public Activity getActivity(Long activityId){
@@ -44,5 +42,10 @@ public class ActivityService {
         activityRepository.delete(activityId);
         //System.out.println("deleted");
     }
+
+	public List<Activity> findall() {
+		// TODO Auto-generated method stub
+		return activityRepository.findAll();
+	}
 
 }

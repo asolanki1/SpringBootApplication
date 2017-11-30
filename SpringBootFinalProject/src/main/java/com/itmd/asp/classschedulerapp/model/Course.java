@@ -10,7 +10,8 @@ package com.itmd.asp.classschedulerapp.model;
  import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@Entity
+ @Entity
+ @Table(name = "COURSE")
 public class Course implements Serializable{
 	   /**
     *
@@ -20,6 +21,7 @@ public class Course implements Serializable{
    @GeneratedValue(strategy=GenerationType.AUTO)
    private long courseId;
 
+   private String userName;
 
 	private String courseName;
 	private String courseCode;
@@ -30,6 +32,15 @@ public class Course implements Serializable{
 	public long getCourseId() {
 	return courseId;
 }
+
+public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 public void setCourseId(long courseId) {
 	this.courseId = courseId;
 }
