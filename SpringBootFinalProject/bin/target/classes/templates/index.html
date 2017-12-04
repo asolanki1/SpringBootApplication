@@ -87,23 +87,23 @@ th:href="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"
                         <div class="modal-body">
                                     <div class="form-group">
                                     <label for="profName">Professor Name</label>
-                                    <input type="name" class="form-control"   th:field="*{profName}" name="profName" id="profName" placeholder="profName"/>
+                                    <input type="name" class="form-control"   th:field="*{profName}" name="profName" id="profName" placeholder="profName" title="Enter Valid Name"  pattern='[a-zA-Z]+' required/>
                                 </div>
                                 <div class="form-group">
                                     <label for="signUpUserName">Username:</label>
-                                    <input type="text" class="form-control" th:field="*{userName}" name="signUpUserName" id="signUpUserName" placeholder="Username"/>
+                                    <input type="text" class="form-control" th:field="*{userName}" name="signUpUserName" id="signUpUserName" placeholder="Username" title="Enter Valid Username"  pattern='[a-zA-Z0-9]+' required/>
                                 </div>
                                 <div class="form-group">
                                     <label for="signUpEmail">Email:</label>
-                                    <input type="email" class="form-control" name="signUpEmail" th:field="*{profEmail}"   id="signUpEmail" placeholder="Email"/>
+                                    <input type="email" class="form-control" name="signUpEmail" th:field="*{profEmail}"   id="signUpEmail" placeholder="Email" title="Enter Valid Email" required/>
                                 </div>
                                 <div class="form-group">
                                     <label for="signUpPassword">Password:</label>
-                                    <input type="password" class="form-control" th:field="*{password}" name="signUpPassword" id="signUpPassword" placeholder="Password"/>
+                                    <input type="password" class="form-control" th:field="*{password}" name="signUpPassword" id="signUpPassword" placeholder="Password" title="Enter Valid Password" required/>
                                 </div>
                                 <div class="form-group">
                                     <label for="signUpConfPassword">Confirm Password:</label>
-                                    <input type="password" class="form-control" name="signUpConfPassword" id="signUpConfPassword" placeholder="Confirm Password"/>
+                                    <input type="password" class="form-control" name="signUpConfPassword" id="signUpConfPassword" placeholder="Confirm Password" title="Enter valid confirmation password" required/>
                                 </div>
 
                            
