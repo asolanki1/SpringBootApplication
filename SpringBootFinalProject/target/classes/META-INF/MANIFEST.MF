@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: class-schedluer-app
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: sriyavishalakshy
+Built-By: rohit
 Implementation-Vendor-Id: com.itmd.asp
-Build-Jdk: 1.8.0_131
+Build-Jdk: 1.8.0_60
 Implementation-URL: http://projects.spring.io/spring-boot/class-schedl
  uer-app/
 Created-By: Maven Integration for Eclipse
