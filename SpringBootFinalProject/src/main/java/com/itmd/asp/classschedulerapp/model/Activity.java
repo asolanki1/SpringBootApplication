@@ -24,7 +24,9 @@ public class Activity implements Serializable{
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long activityId;
     
-    private String activityCourse;
+    	private String userName;
+
+	private String activityCourse;
     private String activityName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date activityStartDate;
@@ -63,6 +65,11 @@ public class Activity implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-    
+    public String getUserName() {
+			return userName;
+		}
+	public void setUserName(String userName) {
+			this.userName = userName;
+		}
 
 }

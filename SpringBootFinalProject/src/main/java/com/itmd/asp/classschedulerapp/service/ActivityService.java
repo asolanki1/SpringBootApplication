@@ -25,6 +25,11 @@ public class ActivityService {
          
     }
 
+    public List<Activity> findActivityByUserName(String UserName){
+    	   
+    			return activityRepository.findActivityByUserName(UserName);
+    	         
+    	    }
     public Activity getActivity(Long activityId){
         return activityRepository.findOne(activityId);
     }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<mvc:annotation-driven ignoreDefaultModelOnRedirect="true" />
 <head lang="en">
 
     <title>Course Scheduler App</title>
@@ -190,6 +191,7 @@ th:href="@{/webjars/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js}">
         </div> <!-- add activity ends -->
     </div><!-- add course, activity button row ends -->
 
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
     <!-- left, right panel starts -->
     <div class="row">
@@ -212,9 +214,9 @@ th:href="@{/webjars/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js}">
                     <th class="col-xs-2 text-center">Date</th>
                     <th class="col-xs-6 text-center">Course Activity</th>
                     <th class="col-xs-2 text-center">Action</th>
-                  <!--    <th class="col-xs-1 text-center">Status</th>
+                  <th class="col-xs-1 text-center">Status</th>
                     <th class="col-xs-1 text-center">Edit</th>
-                    <th class="col-xs-1 text-center">Delete</th>-->
+                    <th class="col-xs-1 text-center">Delete</th>
                 </tr>
                 </thead>
                 <tbody  >
@@ -223,13 +225,15 @@ th:href="@{/webjars/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js}">
                     <td class="col-xs-6 text-left" th:text="${activities.activityCourse} +' - '+ ${activities.activityName} ">ITMD 515 - Assignment 2</td>
                     <td class="col-xs-2 text-center">Upload on BB</td>
                     <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-ok"></span></td>
-                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon-glyphicon glyphicon-pencil"></span></td>
-                    <td class="col-xs-1 text-center"><span class="glyphicon glyphicon glyphicon-trash"></span></td>
+                    <td class="col-xs-1 text-center" > <a th:href="@{activity/edit/{id}(id=${activities.activityId})}" ><span class="glyphicon glyphicon-glyphicon glyphicon-pencil" ></span></a></td>
+                 
+                    <td class="col-xs-1 text-center" > <a th:href="@{{id}(id=${activities.activityId})}" > <span class="glyphicon glyphicon glyphicon-trash"></span></a></td>
                 </tr>
 
 
                 </tbody>
             </table>
+        
         </div><!-- Right panel starts -->
 
     </div><!-- left, right panel starts -->

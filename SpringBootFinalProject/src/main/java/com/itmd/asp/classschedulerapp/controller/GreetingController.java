@@ -32,8 +32,8 @@ public class GreetingController {
     private  List <Course> tests; 
     @Autowired
     private UserRepository userRepositary;
-
-
+    @Autowired
+    private ActivityService activityService;
 
     @RequestMapping("/")
     public String greetingForm(Model model) {
@@ -56,19 +56,22 @@ public class GreetingController {
    User username = userRepositary.findUserByUsernamePassword(user.getUserName(),user.getPassword());
    if(username!=null)
    {
-   model.addAttribute("newuser", username);
-
-    	   Course c = new Course();
-    	   c.setUserName(user.getUserName());
+	   String userName = user.getUserName();
         model.addAttribute("course", new Course());
         model.addAttribute("activity", new Activity());
-        session.setAttribute("username",user.getUserName());
-       
+        model.addAttribute("editActivity", new Activity());
+        
+        session.setAttribute("username",userName);
+        
+		List<Activity> listActivity = 	activityService.findActivityByUserName(userName);
+    	
+  	  model.addAttribute("course", new Course());
+  	  model.addAttribute("activityList", listActivity);
        // tests = courseRepositary.findAll();
        // if(!tests.isEmpty())
-        tests = courseRepositary.findAllByCoursesId(user.getUserName());
+        tests = courseRepositary.findAllByCoursesId(userName);
         model.addAttribute("courseList", tests);
-        model.addAttribute("usernameprof", user.getUserName());
+        model.addAttribute("usernameprof", userName);
         System.out.println("heere"+tests.toString());
         session.setAttribute("Model", model);
         return "mainPage";
